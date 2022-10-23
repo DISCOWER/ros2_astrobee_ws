@@ -79,8 +79,10 @@ RUN sudo rosdep init
 RUN rosdep update
 RUN rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
 RUN colcon build --symlink-install
+RUN echo "source ${ROS2_WS_DIR}/install/setup.bash" >> /home/${USERNAME}/.bashrc
 
-RUN . ${ROS2_WS_DIR}/install/setup.bash
+CMD ["/bin/bash", "--login", "-c"]
+
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 # USER $USERNAME
